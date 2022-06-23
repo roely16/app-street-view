@@ -2,7 +2,7 @@
     <div>
         <v-row v-if="url">
             <v-col cols="12">
-                <iframe src="https://orbit.muniguate.com:1111/publication/Free_Basic" type="" />
+                <iframe src="https://orbit.muniguate.com:1111/publication/Free_Basic" />
             </v-col>
         </v-row>
         <v-row v-else class="ma-4" justify="center">
@@ -28,13 +28,29 @@
 </template>
 
 <style scoped>
-iframe {
-    display: block;       /* iframes are inline by default */
-    background: #000;
-    border: none;         /* Reset default border */
-    height: 100vh;        /* Viewport-relative units */
-    width: 100vw;
-}
+    iframe {
+        display: block;       /* iframes are inline by default */
+        background: #000;
+        border: none;         /* Reset default border */
+        height: 100vh;        /* Viewport-relative units */
+        width: 100vw;
+    }
+    #parent {
+        width: 200px;
+        height: 200px;
+        border:solid 1px #000;
+    }
+    #parent > button {
+        opacity: 0.3;
+        position:relative;
+        float: right;
+        right:10px;
+        bottom:35px;
+        transition: 0.5s;
+    }
+    #parent > button {
+        opacity: 1;
+    } 
 </style>
 
 <script>
@@ -45,7 +61,15 @@ export default {
 
             const result = JSON.parse(localStorage.getItem('app-street-view'))
 
-            return result.url
+            if (result) {
+                
+                return result.url
+
+            }
+
+            return null
+
+            
         }
     }
 }

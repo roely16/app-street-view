@@ -8,12 +8,12 @@
 			</v-col>
 		</v-row>
 		<v-row justify="center" class="mt-5">
-            <v-col cols="12" lg="4" md="4" sm="8">
+            <v-col cols="12" lg="5" md="6" sm="7">
 				<form-card class="form">
 					<template #form>
 						<login-form></login-form>
-						<v-card-text class="mt-4 mb-4">
-							<v-btn @click="doLogin()" :loading="loading" :disabled="loading || !usuario.email || !usuario.password" class="elevation-0" color="primary" large block>Ingresar</v-btn>
+						<v-card-text class="pl-10 pr-10 mt-4 mb-4">
+							<v-btn tabindex="3" @click="doLogin()" :loading="loading" :disabled="loading || !usuario.email || !usuario.password" class="elevation-0 rounded-lg" color="primary" large block>Ingresar</v-btn>
 						</v-card-text>
 						<v-card-text class="text-center">
 							<span class="font-weight-medium subtitle-1">
@@ -32,6 +32,9 @@
 <style scoped>
 	.header{
 		min-height: 30vh;
+	}
+	.login{
+		background-color: red;
 	}
 	
 </style>

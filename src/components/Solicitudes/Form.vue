@@ -55,7 +55,7 @@
                             <v-btn @click="actualizarSolicitud()" :loading="loading" :disabled="loading" class="elevation-0" color="primary">
                                 Aceptar
                             </v-btn>
-                            <v-btn class="ml-2" color="secondary">
+                            <v-btn @click="setShow(false)" class="ml-2" color="secondary">
                                 Cancelar
                             </v-btn>
                         </v-col>
@@ -81,7 +81,8 @@
 
 <script>
 
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
+
 export default {
     name: 'FormSolicitud',
     data(){
@@ -92,6 +93,9 @@ export default {
     methods: {
         ...mapActions({
             actualizarSolicitud: 'solicitudes/actualizarSolicitud'
+        }),
+        ...mapMutations({
+            setShow: 'dialog/setShow'
         })
     },
     computed: {

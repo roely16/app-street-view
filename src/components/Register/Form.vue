@@ -21,8 +21,8 @@
             </v-col>
         </v-row>
         <v-row class="mt-5">
-            <v-col>
-                <v-btn :loading="loading" :disabled="loading" type="submit" large class="elevation-0" color="primary" block>
+            <v-col class="pl-10 pr-10">
+                <v-btn :loading="loading" :disabled="loading" type="submit" large class="elevation-0 rounded-lg" color="primary" block>
                     Registrarse
                 </v-btn>
             </v-col>
