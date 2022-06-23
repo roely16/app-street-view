@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Orbit from '../views/Orbit'
+import Solicitudes from '../views/Solicitudes.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/orbit',
     name: 'orbit',
     component: Orbit
+  },
+  {
+    path: '/solicitudes',
+    name: 'solicitudes',
+    component: Solicitudes
   }
 ]
 

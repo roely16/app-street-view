@@ -8,6 +8,11 @@ import vuetify from './plugins/vuetify'
 import LottieAnimation from "lottie-vuejs/src/LottieAnimation.vue"; // import lottie-vuejs
 Vue.use(LottieAnimation); 
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
 Vue.config.productionTip = false
 
 new Vue({
