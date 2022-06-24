@@ -3,7 +3,7 @@ module.exports = defineConfig({
   transpileDependencies: [
     'vuetify'
   ],
-  publicPath: process.env.NODE_ENV === 'production' ? '/apps/app-street-view/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/apps/view-catastro-360/' : '/',
 	pwa: {
 		workboxOptions: {
 			skipWaiting: true

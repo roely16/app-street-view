@@ -5,6 +5,7 @@ import register from './register'
 import solicitudes from './solicitudes'
 import dialog from './dialog'
 import login from './login'
+import pagination from './pagination'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     register: register,
     solicitudes: solicitudes,
     dialog: dialog,
-    login: login
+    login: login,
+    pagination: pagination
   }
 })

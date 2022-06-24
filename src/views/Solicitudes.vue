@@ -50,9 +50,9 @@
                 <v-text-field class="rounded-lg" hide-details v-model="search" prepend-inner-icon="mdi-magnify" label="Buscar" outlined></v-text-field>
             </v-col>
         </v-row>
-        <v-card class="rounded-xl" outlined min-height="500" elevation="0">
+        <v-card class="rounded-xl" outlined elevation="0">
             <v-card-text class="pl-0 pr-0">
-                <v-data-table fixed-header :search="search" hide-default-footer :items="filter_items" :headers="solicitudes.headers">
+                <v-data-table :page.sync="page" :items-per-page="per_page ? per_page : filter_items.length" fixed-header :search="search" hide-default-footer :items="filter_items" :headers="solicitudes.headers">
                     <template v-slot:[`item.estado`]="{ item }">
                         <v-chip outlined :color="item.color" label>
                             {{ item.estado }}
@@ -67,6 +67,10 @@
                         </v-btn>
                     </template>
                 </v-data-table>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-text>
+                <pagination :items="filter_items.length"></pagination>
             </v-card-text>
         </v-card>
         <dialog-solicitud>
@@ -90,30 +94,34 @@
 
 <script>
 
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 import Dialog from '@/components/Dialog'
 import Form from '@/components/Solicitudes/Form.vue'
+import Pagination from '@/components/Pagination'
 
 export default {
     name: 'SolicitudesView',
+    components: {
+        'dialog-solicitud': Dialog,
+        'form-solicitud': Form,
+        'pagination': Pagination
+    },  
     data(){
         return{
-            page: 1,
             pageCount: 0,
             itemsPerPage: 10,
             search: null,
             estado_filter: null      
         }
     },
-    components: {
-        'dialog-solicitud': Dialog,
-        'form-solicitud': Form
-    },  
     methods: {
         ...mapActions({
             fetchSolicitudes: 'solicitudes/fetchSolicitudes',
             detalleSolicitud: 'solicitudes/detalleSolicitud'
+        }),
+        ...mapMutations({
+            setPage: 'pagination/setPage'
         }),
         editarSolicitud(){
 
@@ -133,8 +141,17 @@ export default {
     },
     computed: {
         ...mapState({
-            solicitudes: state => state.solicitudes.solicitudes
+            solicitudes: state => state.solicitudes.solicitudes,
+            per_page: state => state.pagination.per_page
         }),
+        page: {
+            set(val){
+                this.setPage(val)
+            },
+            get(){
+                return parseInt(this.$store.state.pagination.page)
+            }
+        },
         filter_items: function(){
 
             if (!this.estado_filter) {
