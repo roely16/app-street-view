@@ -8,13 +8,21 @@
                 <v-col cols="12">
                     <v-text-field tabindex="2" v-model="usuario.password" @click:append="show_password = !show_password" :append-icon="show_password ? 'mdi-eye-off' : 'mdi-eye'" hide-details :type="show_password ? 'text' : 'password'" placeholder="Contraseña" prepend-icon="mdi-lock"></v-text-field>
                     <div class="mt-2 text-right">
-                        <span class="font-weight-bold primary--text">¿Olvidó su contraseña?</span>
+                        <router-link class="font-weight-bold primary--text link" :to="{name: 'forgot_password'}">
+                            ¿Olvidó su contraseña?
+                        </router-link>
                     </div>
                 </v-col>
             </v-col>
         </v-row>
     </v-card-text>
 </template>
+
+<style scoped>
+    .link{
+        text-decoration: none;
+    }
+</style>
 
 <script>
 

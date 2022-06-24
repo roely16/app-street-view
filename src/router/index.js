@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Orbit from '../views/Orbit'
 import Solicitudes from '../views/Solicitudes.vue'
+import ForgotPassword from '../views/ForgotPassword'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/solicitudes',
     name: 'solicitudes',
     component: Solicitudes
+  },
+  {
+    path: '/forgot_password',
+    name: 'forgot_password',
+    component: ForgotPassword
   }
 ]
 

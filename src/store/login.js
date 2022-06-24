@@ -11,7 +11,8 @@ const state = {
     usuario: {
         email: null,
         password: null
-    }
+    },
+    sending: false
 }
 
 const mutations = {
@@ -21,6 +22,9 @@ const mutations = {
     },
     setUsuario: (state, payload) => {
         state.usuario = payload
+    },
+    setSending: (state, payload) => {
+        state.sending = payload
     }
 
 }
@@ -47,6 +51,31 @@ const actions = {
             Swal.fire(error.response.data)
 
             commit('setLoading', false)
+
+        }
+
+    },
+    async recoverPassword({commit}, payload){
+
+        try {
+            
+            commit('setSending', true)
+
+            const data = {
+                email: payload
+            }
+
+            const response = await axios.post(process.env.VUE_APP_API_URL + 'recover_password', data)
+
+            Swal.fire(response.data)
+
+            commit('setSending', false)
+
+        } catch (error) {
+            
+            commit('setSending', false)
+
+            Swal.fire(error.response.data)
 
         }
 
