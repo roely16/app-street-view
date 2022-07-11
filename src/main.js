@@ -5,13 +5,14 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 
-import LottieAnimation from "lottie-vuejs/src/LottieAnimation.vue"; // import lottie-vuejs
+import LottieAnimation from "lottie-web-vue";
 Vue.use(LottieAnimation); 
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
+
 
 Vue.config.productionTip = false
 

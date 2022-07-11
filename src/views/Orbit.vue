@@ -1,22 +1,21 @@
 <template>
-    <div>
-        <v-row v-if="url">
-            <v-col cols="12">
-                <iframe src="https://orbit.muniguate.com:1111/publication/Free_Basic" />
+    <div >
+        <navbar></navbar>
+        <v-row v-if="url && !deny && !check_session">
+            <v-col cols="12" class="pr-0 mb-0 pb-0">
+                <iframe ref="orbit" id="orbit" :src="url" width="100%" />
             </v-col>
         </v-row>
-        <v-row v-else class="ma-4" justify="center">
+        <v-row v-else-if="!url" class="ma-4" justify="center">
             <v-col cols="6">
-                <v-alert
-                    prominent
-                    type="error"
-                    >
+                <v-alert prominent type="error">
                     <v-row align="center">
                         <v-col class="grow">
-                            ES NECESARIO QUE SOLICITE PERMISOS DE VISUALIZACIÓN CON EL ADMINISTRADOR
+                            ES NECESARIO QUE SOLICITE PERMISOS DE VISUALIZACIÓN
+                            CON EL ADMINISTRADOR
                         </v-col>
                         <v-col class="shrink">
-                            <v-btn @click="$router.push({name: 'login'})">
+                            <v-btn @click="$router.push({ name: 'login' })">
                                 OK
                             </v-btn>
                         </v-col>
@@ -24,53 +23,88 @@
                 </v-alert>
             </v-col>
         </v-row>
+        <v-row justify="center" align="center" v-if="check_session">
+            <v-col cols="2">
+                <loading></loading>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
 <style scoped>
     iframe {
-        display: block;       /* iframes are inline by default */
+        display: block; /* iframes are inline by default */
         background: #000;
-        border: none;         /* Reset default border */
-        height: 100vh;        /* Viewport-relative units */
+        border: none; /* Reset default border */
+        height: 93vh;
         width: 100vw;
+        /* pointer-events:none */
     }
-    #parent {
-        width: 200px;
-        height: 200px;
-        border:solid 1px #000;
-    }
-    #parent > button {
-        opacity: 0.3;
-        position:relative;
-        float: right;
-        right:10px;
-        bottom:35px;
-        transition: 0.5s;
-    }
-    #parent > button {
-        opacity: 1;
-    } 
 </style>
 
 <script>
-export default {
-    name: 'OrbitView',
-    computed: {
-        url: function(){
 
-            const result = JSON.parse(localStorage.getItem('app-street-view'))
+import NavBar from "@/components/Orbit/NavBar";
+import Loading from '@/components/Orbit/Loading'
+
+import { mapActions, mapMutations, mapState } from "vuex";
+
+export default {
+    name: "OrbitView",
+    components: {
+        navbar: NavBar,
+        'loading': Loading
+    },
+    data(){
+        return{
+            interval: null,
+            loading: false
+        }
+    },
+    methods: {
+        ...mapActions({
+            checkSession: 'home/checkSession'
+        }),
+        ...mapMutations({
+            setLoaded: 'home/setLoaded'
+        })
+    },
+    computed: {
+        ...mapState({
+            loaded: state => state.home.loaded,
+            shows_message: state => state.home.shows_message,
+            check_session: state => state.home.check_session,
+            deny: state => state.home.deny
+        }),
+        url: function () {
+            const result = JSON.parse(sessionStorage.getItem("app-street-view"));
 
             if (result) {
+                return result.url;
+            }
+
+            return null;
+        },
+    },
+    watch: {
+        shows_message: function(val){
+            if (!val) {
+                clearInterval(this.interval)
+            }
+        }
+    },
+    mounted(){
+
+        this.interval = setInterval(() => {
+
+            if (!this.shows_message) {
                 
-                return result.url
+                this.checkSession()
 
             }
 
-            return null
+        }, 1000)
 
-            
-        }
-    }
-}
+    },
+};
 </script>

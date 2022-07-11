@@ -6,6 +6,7 @@ import solicitudes from './solicitudes'
 import dialog from './dialog'
 import login from './login'
 import pagination from './pagination'
+import home from './home'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     solicitudes: solicitudes,
     dialog: dialog,
     login: login,
-    pagination: pagination
+    pagination: pagination,
+    home: home
   }
 })

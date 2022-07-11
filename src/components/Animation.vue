@@ -1,22 +1,26 @@
 <template>
     <div>
         <lottie-animation
-            path="lottie/login.json"
+            ref="anim"
+            :animationData="require('@/assets/lottie/loading.json')"
             :loop="true"
             :autoPlay="true"
             :speed="1"
-            :width="256"
-            :height="256"
+            width="100"
+            height="100"
         />
     </div>
 </template>
 
 <script>
 
-import LottieAnimation from "lottie-vuejs/src/LottieAnimation.vue";
+import LottieAnimation from 'lottie-web-vue'
 
 export default {
     name: 'AnimationLottie',
+    props: {
+        path: String
+    },
     components: {
         LottieAnimation
     }
