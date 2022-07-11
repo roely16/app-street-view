@@ -42,9 +42,10 @@ const router = new VueRouter({
 
 // eslint-disable-next-line no-unused-vars
 router.beforeEach(async (to, from, next) => {
+
     const user = JSON.parse(sessionStorage.getItem("app-street-view"));
 
-    if (to.name != "login" && to.name != "register") {
+    if ((to.name != "login" && to.name != "register") && to.name != 'solicitudes') {
         if (!user) {
             // Enviar al login
             return next("/");

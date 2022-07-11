@@ -120,7 +120,8 @@ const actions = {
             // Enviar petición
             const data = {
                 id: userData.id_usuario,
-                tabId: rootState.home.tabID
+                tabId: rootState.home.tabID,
+                bitacora_id: userData.bitacora_id
             }
 
             const response = await axios.post(process.env.VUE_APP_API_URL + 'logout', data)
@@ -128,6 +129,7 @@ const actions = {
             if (response.data.status === 200) {
                 
                 sessionStorage.removeItem('app-street-view')
+                sessionStorage.clear()
 
                 sessionStorage.setItem('tabIdStorageKey', Date.now())
 
