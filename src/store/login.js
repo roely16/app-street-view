@@ -71,7 +71,7 @@ const actions = {
 
                         Swal.fire(
                             'Excelente!',
-                            'La sesión anterior ha sido finalizada.  Es necesario reintantar ingresar.',
+                            'La sesión anterior ha sido finalizada.  Es necesario que ingrese nuevamente.',
                             'success'
                         )
 
