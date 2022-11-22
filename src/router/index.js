@@ -45,7 +45,7 @@ router.beforeEach(async (to, from, next) => {
 
     const user = JSON.parse(sessionStorage.getItem("app-street-view"));
 
-    if ((to.name != "login" && to.name != "register") && to.name != 'solicitudes') {
+    if ((to.name != "login" && to.name != "register" && to.name != 'forgot_password') && to.name != 'solicitudes') {
         if (!user) {
             // Enviar al login
             return next("/");
