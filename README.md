@@ -1,4 +1,6 @@
-# app-street-view
+# App Catastro 360
+
+Aplicación para poder visualizar el servicio tipo "Google Street View" de la ciudad.
 
 ## Project setup
 ```
